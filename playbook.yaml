@@ -1,0 +1,20 @@
+--- # conditional
+- hosts: all
+  become: true
+  connection: ssh
+  tasks:
+   - name: install apache server on debian
+     command: apt-get -y install apache2
+     when: ansible_os_family == 'Debian'
+
+   - name: update ubuntu packages and install git
+     apt: 
+       name: git
+       update_cache: yes 
+       state: present
+
+   - name: install tree
+     apt:
+       name: tree
+       update_cache: yes
+       state: present
